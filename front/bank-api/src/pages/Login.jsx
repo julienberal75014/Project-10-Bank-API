@@ -13,16 +13,13 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const userRedux = useSelector((state) => state.user);
-  console.log(userRedux);
 
   async function handleLogin(e) {
     e.preventDefault();
 
     const response = await loginUser(email, password);
-    console.log(response);
     const token = response.body.token;
     const user = await getUserData(token);
-    console.log(user, token);
     dispatch(
       getUser({
         firstName: user.body.firstName,
@@ -30,6 +27,8 @@ function Login() {
         token: token,
       })
     );
+
+    navigate("/profil");
   }
 
   return (
@@ -63,13 +62,9 @@ function Login() {
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            {/*<!-- PLACEHOLDER DUE TO STATIC SITE -->*/}
             <button className="sign-in-button" onClick={handleLogin}>
               Sign In
             </button>
-            {/*<!-- SHOULD BE THE BUTTON BELOW -->
-          <!-- <button className="sign-in-button">Sign In</button> -->
-          <!--  -->*/}
           </form>
         </section>
       </main>

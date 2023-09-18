@@ -1,17 +1,35 @@
 import "../assets/styles/main.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData, logoutUser } from "../redux/action";
+import UpdatedUser from "../components/UpdateUser";
 
 function UserProfile() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.user);
+
+  console.log(userData);
+
+  useEffect(() => {
+    // si pas de token, on redirige vers la page login
+    if (!userData.token) {
+      // si on a un token, on récupère les données de l'utilisateur et on le redirige vers la page profil
+      if (userData.token) {
+        dispatch(getUserData(userData.token));
+        navigate("/profil");
+      } else {
+        // si on a pas de token, on redirige vers la page login
+        dispatch(logoutUser());
+        navigate("/login");
+      }
+    }
+  }, [userData.token, dispatch, navigate]);
   return (
     <main className="main bg-dark">
-      <div className="header">
-        <h1>
-          Welcome back
-          <br />
-          Tony Jarvis!
-        </h1>
-        <button className="edit-button">Edit Name</button>
-      </div>
       <h2 className="sr-only">Accounts</h2>
+      <UpdatedUser userData={userData} />
       <section className="account">
         <div className="account-content-wrapper">
           <h3 className="account-title">Argent Bank Checking (x8349)</h3>

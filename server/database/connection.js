@@ -4,7 +4,7 @@ const databaseUrl =
 
 module.exports = async () => {
   try {
-    await mongoose.connect(databaseUrl, { useNewUrlParser: true })
+    await mongoose.connect("mongodb+srv://hiwawk:unjcMcttAWn4w5tN@cluster0.mtrqw.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true })
     console.log('Database successfully connected')
   } catch (error) {
     console.error(`Database Connectivity Error: ${error}`)
