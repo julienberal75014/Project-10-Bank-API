@@ -14,7 +14,6 @@ function UpdatedUser({ userData }) {
 
   async function handleEdit(e) {
     e.preventDefault();
-    console.log(userData);
 
     const response = await updateUser(firstName, lastName, userData.token);
     const user = await getUserData(userData.token);
@@ -27,8 +26,6 @@ function UpdatedUser({ userData }) {
     );
 
     setUsername(false);
-
-    console.log(response, user);
   }
   return userName ? (
     <div className="header">

@@ -9,8 +9,7 @@ function UserProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user);
-
-  console.log(userData);
+  const state = useSelector((state) => state);
 
   useEffect(() => {
     // si pas de token, on redirige vers la page login
