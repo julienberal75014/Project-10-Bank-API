@@ -30,11 +30,7 @@ export async function loginUser(email, password) {
     });
     const data = await response.json();
 
-    //localStorage.setItem('token', data.token);
-
-
-    //dispatch(getUserData());
-    return data
+    return data;
 }
 
 // TODO : Voir la librairie redux-persist pour le rememberMe
